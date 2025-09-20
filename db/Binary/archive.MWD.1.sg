@@ -7,7 +7,12 @@ meta("archive", "Medievil WAD");
 
 function detect() {
     if (Binary.compare("44 41 57 4D")) {
-        bDetected = true;
+        var creationDate = Binary.getString(24, 29).trim();
+
+        if (/^[A-Z0-9]{29}$/) {
+            sOptions = "Creation date: " + creationDate;
+            bDetected = true;
+        }
     }
 
     return result();
